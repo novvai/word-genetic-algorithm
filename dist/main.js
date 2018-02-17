@@ -1,17 +1,17 @@
 "use strict";
 var WordData = /** @class */ (function () {
-    function WordData(childLeters) {
+    function WordData(childLetters) {
         this.letters = "";
         this.fitness = 0;
-        this.generateGenes(childLeters);
+        this.generateGenes(childLetters);
         this.calculateFitness();
     }
     WordData.prototype.setLettersData = function (letters) {
         this.letters = letters;
     };
-    WordData.prototype.generateGenes = function (childLeters) {
-        if (childLeters !== undefined && childLeters !== "") {
-            this.mutate(childLeters);
+    WordData.prototype.generateGenes = function (childLetters) {
+        if (childLetters !== undefined && childLetters !== "") {
+            this.mutate(childLetters);
         }
         else {
             for (var i = 0; i < Environment.word.length; i++) {
@@ -19,12 +19,12 @@ var WordData = /** @class */ (function () {
             }
         }
     };
-    WordData.prototype.mutate = function (childLeters) {
-        var lettersForMutation = Math.ceil(childLeters.length * Environment.mutationRate);
+    WordData.prototype.mutate = function (childLetters) {
+        var lettersForMutation = Math.ceil(childLetters.length * Environment.mutationRate);
         var mutatedLetters = 0;
         for (var i = 0; i < lettersForMutation; i++) {
-            mutatedLetters = Math.floor(Math.random() * childLeters.length);
-            var buffer = childLeters.split('');
+            mutatedLetters = Math.floor(Math.random() * childLetters.length);
+            var buffer = childLetters.split('');
             buffer[mutatedLetters] = WordData.probability[Math.floor(Math.random() * WordData.probability.length)];
             this.letters = buffer.join('');
         }

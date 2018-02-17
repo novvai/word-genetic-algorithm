@@ -3,8 +3,8 @@ class WordData {
     private letters: String = "";
     private fitness: number = 0;
 
-    constructor(childLeters?: String) {
-        this.generateGenes(childLeters);
+    constructor(childLetters?: String) {
+        this.generateGenes(childLetters);
         this.calculateFitness();
     }
 
@@ -12,21 +12,21 @@ class WordData {
         this.letters = letters;
     }
 
-    private generateGenes(childLeters?: String): void {
-        if (childLeters !== undefined && childLeters !== "") {
-            this.mutate(childLeters);
+    private generateGenes(childLetters?: String): void {
+        if (childLetters !== undefined && childLetters !== "") {
+            this.mutate(childLetters);
         } else {
             for (let i = 0; i < Environment.word.length; i++) {
                 this.letters += WordData.probability[Math.floor(Math.random() * WordData.probability.length)];
             }
         }
     }
-    private mutate(childLeters: String) {
-        let lettersForMutation = Math.ceil(childLeters.length * Environment.mutationRate);
+    private mutate(childLetters: String) {
+        let lettersForMutation = Math.ceil(childLetters.length * Environment.mutationRate);
         let mutatedLetters:number = 0;
         for (let i = 0; i < lettersForMutation; i++) {
-            mutatedLetters = Math.floor(Math.random() * childLeters.length);
-            let buffer = childLeters.split('');
+            mutatedLetters = Math.floor(Math.random() * childLetters.length);
+            let buffer = childLetters.split('');
             buffer[mutatedLetters] = WordData.probability[Math.floor(Math.random() * WordData.probability.length)];
             this.letters = buffer.join('');
         }
